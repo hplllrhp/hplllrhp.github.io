@@ -79,15 +79,15 @@
 
 
 
-<meta name="description" content="查看当前代理设置git config –global http.proxygit config –global https.proxy  设置当前代理为 http:&#x2F;&#x2F;127.0.0.1:1080 或 socket5:&#x2F;&#x2F;127.0.0.1:1080git config –global http.proxy ‘http:&#x2F;&#x2F;127.0.0.1:1080&amp;#39;git config –globa">
+<meta name="description" content="Linux&amp;amp;&amp;amp;git命令语法格式参考文章 Linux和Git命令中的中括号[]和尖括号&amp;lt;&amp;gt;和竖杠|和省略号…其实都是根据一个规则制定的，这个规则便是Linux帮助文档的编写规则:命令行界面描述语言Docopt。所有的Linux或Git的帮助文档的公式都是按照命令行界面描述语言Docopt的语法规则来编写，因此我们了解清楚命令行界面描述语言Docopt就终于能读懂Linu">
 <meta name="keywords" content="Git">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Git FAQ">
 <meta property="og:url" content="http:&#x2F;&#x2F;yoursite.com&#x2F;2019&#x2F;11&#x2F;28&#x2F;Git-FAQ&#x2F;index.html">
 <meta property="og:site_name" content="hplllrhp&#39;s Blog">
-<meta property="og:description" content="查看当前代理设置git config –global http.proxygit config –global https.proxy  设置当前代理为 http:&#x2F;&#x2F;127.0.0.1:1080 或 socket5:&#x2F;&#x2F;127.0.0.1:1080git config –global http.proxy ‘http:&#x2F;&#x2F;127.0.0.1:1080&amp;#39;git config –globa">
+<meta property="og:description" content="Linux&amp;amp;&amp;amp;git命令语法格式参考文章 Linux和Git命令中的中括号[]和尖括号&amp;lt;&amp;gt;和竖杠|和省略号…其实都是根据一个规则制定的，这个规则便是Linux帮助文档的编写规则:命令行界面描述语言Docopt。所有的Linux或Git的帮助文档的公式都是按照命令行界面描述语言Docopt的语法规则来编写，因此我们了解清楚命令行界面描述语言Docopt就终于能读懂Linu">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2019-11-28T06:17:22.970Z">
+<meta property="og:updated_time" content="2019-11-28T07:10:13.034Z">
 <meta name="twitter:card" content="summary">
 
 
@@ -298,15 +298,31 @@
       
 
       
-        <ul>
-<li><p>查看当前代理设置<br>git config –global http.proxy<br>git config –global https.proxy</p>
+        <h3 id="Linux-amp-amp-git命令语法格式"><a href="#Linux-amp-amp-git命令语法格式" class="headerlink" title="Linux&amp;&amp;git命令语法格式"></a>Linux&amp;&amp;git命令语法格式</h3><p><a href="https://blog.csdn.net/wq6ylg08/article/details/88919530" target="_blank" rel="noopener">参考文章</a></p>
+<p>Linux和Git命令中的中括号[]和尖括号&lt;&gt;和竖杠|和省略号…其实都是根据一个规则制定的，这个规则便是Linux帮助文档的编写规则:命令行界面描述语言Docopt。所有的Linux或Git的帮助文档的公式都是按照命令行界面描述语言Docopt的语法规则来编写，因此我们了解清楚命令行界面描述语言Docopt就终于能读懂Linux和Git命令的帮助文档了！</p>
+<ul>
+<li><p><code>7z &lt;command&gt; [&lt;switches&gt;...] &lt;archive_name&gt; [&lt;file_names&gt;...]  [&lt;@listfiles...&gt;]</code></p>
+<ul>
+<li><p>(1)<code>7z</code>：根据上面3(2)(C)规则的定义，<code>7z</code>没有尖括号和连字符，所以<code>7z</code>就是<code>命令</code>。</p>
 </li>
-<li><p>设置当前代理为 <a href="http://127.0.0.1:1080" target="_blank" rel="noopener">http://127.0.0.1:1080</a> 或 socket5://127.0.0.1:1080<br>git config –global http.proxy ‘<a href="http://127.0.0.1:1080&#39;" target="_blank" rel="noopener">http://127.0.0.1:1080&#39;</a><br>git config –global https.proxy ‘<a href="http://127.0.0.1:1080&#39;" target="_blank" rel="noopener">http://127.0.0.1:1080&#39;</a></p>
+<li><p>(2)<command>：根据上面3(2)(C)规则的定义，<command>有尖括号，但<command>在下文的帮助文档中给出了<command>的所有可能性，而这些可能性都是不带连字符的字母，所以<command>不是选项。并且这些有限的可能性不符合位置参数指定命令的操作对象的定义，所以它是命令。又因为<command>跟在7z命令后面，所以<command>是子命令。</p>
 </li>
-<li><p>git config –global http.proxy ‘socks5://127.0.0.1:1080’<br>git config –global https.proxy ‘socks5://127.0.0.1:1080’</p>
+<li><p>(3)[<switches>…]：根据上面3(2)(D)规则的定义，最外层有方括号[]，代表里面的元素可有可没有。而里面是尖括号&lt;&gt;加省略号，意思是switches可以有1个<del>多个。同时，switches在下文的帮助文档中给出了switches的所有可能性，而这些可能性都是带连字符的字母，所以<switches>是选项。[<switches>…]代表的是有0</del>多个<switches>选项。</p>
 </li>
-<li><p>删除 proxy<br>git config –global –unset http.proxy<br>git config –global –unset https.proxy</p>
+<li><p>(4)<archive_name>：带有尖括号，说明这个元素是必填的，但在下文的帮助文档中并未给出它的任何定义，所以它不是命令也不是选项。其实<archive_name>代表的意思是被压缩后新生成的压缩包的文件名 或 需要解压的压缩包的文件名，同时它又有尖括号，符合位置参数的定义，所以<archive_name>是位置参数。</p>
 </li>
+<li><p>(5)[<file_names>…]：类同于(3)[<switches>…]的结构，代表的是有0~多个<file_names>选项。同时类比于(4)<archive_name>，<file_names>在下文的帮助文档中并未被给出任何定义，<file_names>代表的意思是需要被压缩的文件的文件名，所以<file_names>也是位置参数。</p>
+</li>
+<li><p>(6)[&lt;@listfiles…&gt;]：类同于(5)[<file_names>…]的结构，&lt;@listfiles…&gt;也是位置参数，[&lt;@listfiles…&gt;]代表的是有0~多个&lt;@listfiles…&gt;选项。</p>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="代理设置"><a href="#代理设置" class="headerlink" title="代理设置"></a>代理设置</h3><ul>
+<li>查看当前代理设置<br>git config –global http.proxy<br>git config –global https.proxy</li>
+<li>设置当前代理为 <a href="http://127.0.0.1:1080" target="_blank" rel="noopener">http://127.0.0.1:1080</a> 或 socket5://127.0.0.1:1080<br>git config –global http.proxy ‘<a href="http://127.0.0.1:1080&#39;" target="_blank" rel="noopener">http://127.0.0.1:1080&#39;</a><br>git config –global https.proxy ‘<a href="http://127.0.0.1:1080&#39;" target="_blank" rel="noopener">http://127.0.0.1:1080&#39;</a></li>
+<li>git config –global http.proxy ‘socks5://127.0.0.1:1080’<br>git config –global https.proxy ‘socks5://127.0.0.1:1080’</li>
+<li>删除 proxy<br>git config –global –unset http.proxy<br>git config –global –unset https.proxy</li>
 </ul>
 
       
@@ -347,6 +363,10 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019/11/28/Hexo-FAQ-by-hplllrhp/" rel="prev" title="Hexo FAQ by hplllrhp">
+                Hexo FAQ by hplllrhp <i class="fa fa-chevron-right"></i>
+              </a>
             
           </div>
         </div>
@@ -398,8 +418,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+      <section class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
@@ -414,7 +443,7 @@
               
                 <a href="/archives/%20%7C%7C%20archive">
               
-                  <span class="site-state-item-count">5</span>
+                  <span class="site-state-item-count">6</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -450,6 +479,22 @@
         </div>
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#Linux-amp-amp-git命令语法格式"><span class="nav-number">1.</span> <span class="nav-text">Linux&amp;&amp;git命令语法格式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#代理设置"><span class="nav-number">2.</span> <span class="nav-text">代理设置</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
       

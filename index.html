@@ -230,6 +230,137 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/11/28/Hexo-FAQ-by-hplllrhp/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="hplllrhp">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="hplllrhp's Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2019/11/28/Hexo-FAQ-by-hplllrhp/" itemprop="url">Hexo FAQ by hplllrhp</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-11-28T14:30:47+08:00">
+                2019-11-28
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p><strong>Node.js</strong></p>
+<p><a href="https://www.zhihu.com/question/33578075" target="_blank" rel="noopener">参考文章</a></p>
+<p>简单的说 Node.js 就是运行在服务端的 JavaScript。</p>
+<p>Node.js 是一个基于Chrome JavaScript 运行时建立的一个平台。</p>
+<p>Node.js是一个事件驱动I/O服务端JavaScript环境，基于Google的V8引擎，V8引擎执行Javascript的速度非常快，性能非常好。</p>
+<p>浏览器给网站发请求的过程一直没怎么变过。当浏览器给网站发了请求。服务器收到了请求，然后开始搜寻被请求的资源。如果有需要，服务器还会查询一下数据库，最后把响应结果传回浏览器。不过，在传统的web服务器中（比如Apache），每一个请求都会让服务器创建一个新的进程来处理这个请求。</p>
+<p>HTTP请求不是持续的连接，你请求一次，服务器响应一次，然后就完了。长轮训是一种利用HTTP模拟持续连接的技巧。具体来说，只要页面载入了，不管你需不需要服务器给你响应信息，你都会给服务器发一个Ajax请求。这个请求不同于一般的Ajax请求，服务器不会直接给你返回信息，而是它要等着，直到服务器觉得该给你发信息了，它才会响应。比如，你的好友发了一条新鲜事，服务器就会把这个新鲜事当做响应发给你的浏览器，然后你的浏览器就刷新页面了。浏览器收到响应刷新完之后，再发送一条新的请求给服务器，这个请求依然不会立即被响应。于是就开始重复以上步骤。利用这个方法，可以让浏览器始终保持等待响应的状态。虽然以上过程依然只有非持续的Http参与，但是我们模拟出了一个看似持续的连接状态</p>
+<p>我们再看传统的服务器（比如Apache）。每次一个新用户连到你的网站上，你的服务器就得开一个连接。每个连接都需要占一个进程，这些进程大部分时间都是闲着的（比如等着你好友发新鲜事，等好友发完才给用户响应信息。或者等着数据库返回查询结果什么的）。虽然这些进程闲着，但是照样占用内存。这意味着，如果用户连接数的增长到一定规模，你服务器没准就要耗光内存直接瘫了。</p>
+<p>这种情况怎么解决？解决方法就是刚才上边说的：<strong>非阻塞</strong>和<strong>事件驱动</strong>。这些概念在我们谈的这个情景里面其实没那么难理解。你把非阻塞的服务器想象成一个loop循环，这个loop会一直跑下去。一个新请求来了，这个loop就接了这个请求，把这个请求传给其他的进程（比如传给一个搞数据库查询的进程），然后响应一个回调（callback）。完事了这loop就接着跑，接其他的请求。这样下来。服务器就不会像之前那样傻等着数据库返回结果了。</p>
+<p> 如果数据库把结果返回来了，loop就把结果传回用户的浏览器，接着继续跑。在这种方式下，你的服务器的进程就不会闲着等着。从而在理论上说，同一时刻的数据库查询数量，以及用户的请求数量就没有限制了。服务器只在用户那边有事件发生的时候才响应，这就是<strong>事件驱动</strong> </p>
+<p>FriendFeed是用基于Python的<strong>非阻塞</strong>框架Tornado (知乎也用了这个框架) 来实现上面说的新鲜事功能的。不过，Node.js就比前者更妙了。Node.js的应用是通过javascript开发的，然后直接在Google的变态V8引擎上跑。用了Node.js，你就不用担心用户端的请求会在服务器里跑了一段能够造成阻塞的代码了。因为javascript本身就是事件驱动的脚本语言。你回想一下，在给前端写javascript的时候，更多时候你都是在搞事件处理和回调函数。javascript本身就是给事件处理量身定制的语言。</p>
+<p>Node.js还是处于初期阶段。如果你想开发一个基于Node.js的应用，你应该会需要写一些很底层代码。但是下一代浏览器很快就要采用WebSocket技术了，从而长轮询也会消失。在Web开发里，Node.js这种类型的技术只会变得越来越重要。</p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/11/28/Git-FAQ/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -301,15 +432,31 @@
       
         
           
-            <ul>
-<li><p>查看当前代理设置<br>git config –global http.proxy<br>git config –global https.proxy</p>
+            <h3 id="Linux-amp-amp-git命令语法格式"><a href="#Linux-amp-amp-git命令语法格式" class="headerlink" title="Linux&amp;&amp;git命令语法格式"></a>Linux&amp;&amp;git命令语法格式</h3><p><a href="https://blog.csdn.net/wq6ylg08/article/details/88919530" target="_blank" rel="noopener">参考文章</a></p>
+<p>Linux和Git命令中的中括号[]和尖括号&lt;&gt;和竖杠|和省略号…其实都是根据一个规则制定的，这个规则便是Linux帮助文档的编写规则:命令行界面描述语言Docopt。所有的Linux或Git的帮助文档的公式都是按照命令行界面描述语言Docopt的语法规则来编写，因此我们了解清楚命令行界面描述语言Docopt就终于能读懂Linux和Git命令的帮助文档了！</p>
+<ul>
+<li><p><code>7z &lt;command&gt; [&lt;switches&gt;...] &lt;archive_name&gt; [&lt;file_names&gt;...]  [&lt;@listfiles...&gt;]</code></p>
+<ul>
+<li><p>(1)<code>7z</code>：根据上面3(2)(C)规则的定义，<code>7z</code>没有尖括号和连字符，所以<code>7z</code>就是<code>命令</code>。</p>
 </li>
-<li><p>设置当前代理为 <a href="http://127.0.0.1:1080" target="_blank" rel="noopener">http://127.0.0.1:1080</a> 或 socket5://127.0.0.1:1080<br>git config –global http.proxy ‘<a href="http://127.0.0.1:1080&#39;" target="_blank" rel="noopener">http://127.0.0.1:1080&#39;</a><br>git config –global https.proxy ‘<a href="http://127.0.0.1:1080&#39;" target="_blank" rel="noopener">http://127.0.0.1:1080&#39;</a></p>
+<li><p>(2)<command>：根据上面3(2)(C)规则的定义，<command>有尖括号，但<command>在下文的帮助文档中给出了<command>的所有可能性，而这些可能性都是不带连字符的字母，所以<command>不是选项。并且这些有限的可能性不符合位置参数指定命令的操作对象的定义，所以它是命令。又因为<command>跟在7z命令后面，所以<command>是子命令。</p>
 </li>
-<li><p>git config –global http.proxy ‘socks5://127.0.0.1:1080’<br>git config –global https.proxy ‘socks5://127.0.0.1:1080’</p>
+<li><p>(3)[<switches>…]：根据上面3(2)(D)规则的定义，最外层有方括号[]，代表里面的元素可有可没有。而里面是尖括号&lt;&gt;加省略号，意思是switches可以有1个<del>多个。同时，switches在下文的帮助文档中给出了switches的所有可能性，而这些可能性都是带连字符的字母，所以<switches>是选项。[<switches>…]代表的是有0</del>多个<switches>选项。</p>
 </li>
-<li><p>删除 proxy<br>git config –global –unset http.proxy<br>git config –global –unset https.proxy</p>
+<li><p>(4)<archive_name>：带有尖括号，说明这个元素是必填的，但在下文的帮助文档中并未给出它的任何定义，所以它不是命令也不是选项。其实<archive_name>代表的意思是被压缩后新生成的压缩包的文件名 或 需要解压的压缩包的文件名，同时它又有尖括号，符合位置参数的定义，所以<archive_name>是位置参数。</p>
 </li>
+<li><p>(5)[<file_names>…]：类同于(3)[<switches>…]的结构，代表的是有0~多个<file_names>选项。同时类比于(4)<archive_name>，<file_names>在下文的帮助文档中并未被给出任何定义，<file_names>代表的意思是需要被压缩的文件的文件名，所以<file_names>也是位置参数。</p>
+</li>
+<li><p>(6)[&lt;@listfiles…&gt;]：类同于(5)[<file_names>…]的结构，&lt;@listfiles…&gt;也是位置参数，[&lt;@listfiles…&gt;]代表的是有0~多个&lt;@listfiles…&gt;选项。</p>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="代理设置"><a href="#代理设置" class="headerlink" title="代理设置"></a>代理设置</h3><ul>
+<li>查看当前代理设置<br>git config –global http.proxy<br>git config –global https.proxy</li>
+<li>设置当前代理为 <a href="http://127.0.0.1:1080" target="_blank" rel="noopener">http://127.0.0.1:1080</a> 或 socket5://127.0.0.1:1080<br>git config –global http.proxy ‘<a href="http://127.0.0.1:1080&#39;" target="_blank" rel="noopener">http://127.0.0.1:1080&#39;</a><br>git config –global https.proxy ‘<a href="http://127.0.0.1:1080&#39;" target="_blank" rel="noopener">http://127.0.0.1:1080&#39;</a></li>
+<li>git config –global http.proxy ‘socks5://127.0.0.1:1080’<br>git config –global https.proxy ‘socks5://127.0.0.1:1080’</li>
+<li>删除 proxy<br>git config –global –unset http.proxy<br>git config –global –unset https.proxy</li>
 </ul>
 
           
@@ -1002,7 +1149,7 @@
               
                 <a href="/archives/%20%7C%7C%20archive">
               
-                  <span class="site-state-item-count">5</span>
+                  <span class="site-state-item-count">6</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
